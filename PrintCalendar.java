@@ -1,3 +1,4 @@
+//U10416030 陳子勤
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -20,11 +21,13 @@ public class PrintCalendar {
 			System.out.println("Please enter again.");
 			month = input.nextInt();
 		}
+		
 		printMonthTitle(year,month);
-		getCalendar(year, month);
+		MyCalendar myCal = new MyCalendar();
+		myCal.getCalendar(year, month);
 
 	}
-	
+
 	public static void printMonthTitle(int year, int month) {
 		System.out.println("	" + getMonthName(month) + 
 				" " + year);
@@ -50,13 +53,18 @@ public class PrintCalendar {
 		}
 		return monthName;
 	}
+}
+
+class MyCalendar {
 	
-	public static void getCalendar(int year, int month) {
+	MyCalendar() {
+	}
+	
+	public void getCalendar(int year, int month) {
 		Calendar g = new GregorianCalendar(year, month-1, 1);
 		int day = g.getActualMaximum(Calendar.DATE);
 		int dayOfWeek = g.get(Calendar.DAY_OF_WEEK);
 		int dayOfMonth = g.get(Calendar.DAY_OF_MONTH);
-		
 		
 		for(int k = 1 ; k < dayOfWeek ; k++) {
 			System.out.print("    ");
