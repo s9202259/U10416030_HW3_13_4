@@ -28,14 +28,14 @@ public class PrintCalendar {
 
 	}
 
-	public static void printMonthTitle(int year, int month) {
+	public static void printMonthTitle(int year, int month) {	//印出標題
 		System.out.println("	" + getMonthName(month) + 
 				" " + year);
 		System.out.println("---------------------------");
 		System.out.println("Sun Mon Tue Wed Thu Fri Sat");
 	}
 	
-	public static String getMonthName(int month) {
+	public static String getMonthName(int month) {	//印出使用者輸入的是哪個月份
 		String monthName = "";
 		switch(month) {
 			case 1: monthName = "January"; break;
@@ -61,17 +61,17 @@ class MyCalendar {
 	}
 	
 	public void getCalendar(int year, int month) {
-		Calendar g = new GregorianCalendar(year, month-1, 1);
-		int day = g.getActualMaximum(Calendar.DATE);
-		int dayOfWeek = g.get(Calendar.DAY_OF_WEEK);
-		int dayOfMonth = g.get(Calendar.DAY_OF_MONTH);
+		Calendar g = new GregorianCalendar(year, month-1, 1);	//新增GregorianCalendar的類別
+		int day = g.getActualMaximum(Calendar.DATE);	//取得月份的總天數
+		int dayOfWeek = g.get(Calendar.DAY_OF_WEEK);	//取得目前是一個禮拜中的第幾天
+		int dayOfMonth = g.get(Calendar.DAY_OF_MONTH);	//取得月份的第一天
 		
-		for(int k = 1 ; k < dayOfWeek ; k++) {
+		for(int k = 1 ; k < dayOfWeek ; k++) {	//將月份第一天前的目份保留為空白
 			System.out.print("    ");
 		}
 		
-		for(dayOfMonth = 1 ; dayOfMonth <= day ; dayOfMonth++) {
-			if(dayOfMonth<10) {
+		for(dayOfMonth = 1 ; dayOfMonth <= day ; dayOfMonth++) {	//從第一天往後算，並連續印出月曆
+			if(dayOfMonth < 10) {
 				System.out.print("  " + dayOfMonth + " ");
 			}
 			else {
