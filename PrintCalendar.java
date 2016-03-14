@@ -1,4 +1,5 @@
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
@@ -19,23 +20,14 @@ public class PrintCalendar {
 			System.out.println("Please enter again.");
 			month = input.nextInt();
 		}
+		printMonthTitle(year,month);
+		getCalendar(year, month);
 
-		GregorianCalendar g = new GregorianCalendar(); 
-        g.set(GregorianCalendar.YEAR, year);
-        g.set(GregorianCalendar.MONTH, month);
-
-        System.out.println("" + year + "   " + month);
-        
-        printMonth(year,month);
 	}
-	public static void printMonth(int year, int month) {
-		printMonthTitle(year, month);
-	}
-
-
+	
 	public static void printMonthTitle(int year, int month) {
 		System.out.println("	" + getMonthName(month) + 
-				"	" + year);
+				" " + year);
 		System.out.println("---------------------------");
 		System.out.println("Sun Mon Tue Wed Thu Fri Sat");
 	}
@@ -54,8 +46,33 @@ public class PrintCalendar {
 			case 9: monthName = "September"; break;
 			case 10: monthName = "October"; break;
 			case 11: monthName = "November"; break;
-			case 12: monthName = "December";
+			case 12: monthName = "December"; break;
 		}
 		return monthName;
+	}
+	
+	public static void getCalendar(int year, int month) {
+		Calendar g = new GregorianCalendar(year, month-1, 1);
+		int day = g.getActualMaximum(Calendar.DATE);
+		int dayOfWeek = g.get(Calendar.DAY_OF_WEEK);
+		int dayOfMonth = g.get(Calendar.DAY_OF_MONTH);
+		
+		
+		for(int k = 1 ; k < dayOfWeek ; k++) {
+			System.out.print("    ");
+		}
+		
+		for(dayOfMonth = 1 ; dayOfMonth <= day ; dayOfMonth++) {
+			if(dayOfMonth<10) {
+				System.out.print("  " + dayOfMonth + " ");
+			}
+			else {
+				System.out.print(" " + dayOfMonth + " ");
+			}           
+			if (g.get(Calendar.DAY_OF_WEEK) == 7) {
+				System.out.println(" ");
+			}
+			g.add(Calendar.DAY_OF_MONTH, 1);
+		}
 	}
 }
